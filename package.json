@@ -86,7 +86,7 @@
     "webpack-merge": "^6.0.1"
   },
   "engines": {
-    "node": "\u003e= 22.15.0"
+    "node": ">= 22.15.0"
   },
   "exports": {
     ".": {
@@ -122,17 +122,18 @@
   "name": "webpack-dev-server",
   "overrides": {
     "@simple-git/argv-parser": "2.0.1",
-    "body-parser@\u003e=1 \u003c2": "1.20.9",
-    "body-parser@\u003e=2 \u003c3": "2.4.0",
-    "fast-uri@\u003e=2 \u003c3": "2.4.8",
-    "fast-uri@\u003e=3 \u003c4": "3.1.9",
-    "fast-uri@\u003e=4 \u003c5": "4.2.3",
+    "body-parser@>=1 <2": "1.20.9",
+    "body-parser@>=2 <3": "2.4.0",
+    "fast-uri@>=2 <3": "2.4.8",
+    "fast-uri@>=3 <4": "3.1.9",
+    "fast-uri@>=4 <5": "4.2.3",
     "minimatch": "11.0.9",
     "shell-quote": "1.12.0",
     "source-map-js": "1.2.4",
-    "undici@\u003e=6 \u003c7": "6.29.1",
-    "undici@\u003e=7 \u003c8": "7.30.2",
-    "undici@\u003e=8 \u003c9": "8.13.1"
+    "undici@>=6 <7": "6.29.1",
+    "undici@>=7 <8": "7.30.2",
+    "undici@>=8 <9": "8.13.1",
+    "katex": "0.18.11"
   },
   "peerDependencies": {
     "webpack": "^5.101.0"
@@ -148,9 +149,9 @@
   "repository": "https://github.com/webpack/webpack-dev-server",
   "scripts": {
     "build": "npm-run-all -p \"build:**\"",
-    "build:cjs": "rimraf -g ./dist/* \u0026\u0026 babel lib --out-dir dist --env-name cjs --copy-files --no-copy-ignored \u0026\u0026 node ./scripts/finalize-cjs-build.mjs",
+    "build:cjs": "rimraf -g ./dist/* && babel lib --out-dir dist --env-name cjs --copy-files --no-copy-ignored && node ./scripts/finalize-cjs-build.mjs",
     "build:client": "node ./scripts/build-client.mjs",
-    "build:types": "rimraf -g ./types/* \u0026\u0026 tsc --declaration --emitDeclarationOnly --outDir types \u0026\u0026 node ./scripts/extend-webpack-types.js \u0026\u0026 prettier \"types/**/*.ts\" --write \u0026\u0026 prettier \"types/**/*.ts\" --write",
+    "build:types": "rimraf -g ./types/* && tsc --declaration --emitDeclarationOnly --outDir types && node ./scripts/extend-webpack-types.js && prettier \"types/**/*.ts\" --write && prettier \"types/**/*.ts\" --write",
     "fix": "npm-run-all -l fix:schema fix:code fix:prettier",
     "fix:code": "npm run lint:code -- --fix",
     "fix:prettier": "npm run lint:prettier -- --write",
@@ -162,11 +163,11 @@
     "lint:schema": "schema-utils precompile --check --minify lib/options.json",
     "lint:spelling": "cspell --cache --no-must-find-files --quiet \"**/*.*\"",
     "lint:types": "tsc --pretty --noEmit",
-    "prepare": "husky \u0026\u0026 npm run build",
+    "prepare": "husky && npm run build",
     "pretest": "npm run lint",
     "test": "npm run test:coverage",
     "test:coverage": "npm run test:only -- --experimental-test-coverage --test-coverage-include=lib/** --test-coverage-include=bin/** --test-coverage-include=client/** --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
-    "test:only": "node ./scripts/check-test-ports.mjs \u0026\u0026 node ./scripts/run-tests.mjs",
+    "test:only": "node ./scripts/check-test-ports.mjs && node ./scripts/run-tests.mjs",
     "test:watch": "npm run test:only -- --watch",
     "validate:changeset": "node .changeset/changeset-validate.mjs"
   },
