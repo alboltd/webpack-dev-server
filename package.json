@@ -1,68 +1,7 @@
 {
-  "name": "webpack-dev-server",
-  "version": "6.1.0",
-  "description": "Serves a webpack app. Updates the browser on changes.",
-  "homepage": "https://github.com/webpack/webpack-dev-server#readme",
-  "bugs": "https://github.com/webpack/webpack-dev-server/issues",
-  "repository": "https://github.com/webpack/webpack-dev-server",
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/webpack"
-  },
-  "license": "MIT",
   "author": "Tobias Koppers @sokra",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./types/lib/Server.d.ts",
-      "import": "./lib/Server.js",
-      "require": "./dist/Server.js",
-      "default": "./lib/Server.js"
-    },
-    "./client/*": "./client/*",
-    "./lib/servers/BaseServer.js": {
-      "types": "./types/lib/servers/BaseServer.d.ts",
-      "import": "./lib/servers/BaseServer.js",
-      "require": "./dist/servers/BaseServer.js",
-      "default": "./lib/servers/BaseServer.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "./dist/Server.js",
-  "module": "./lib/Server.js",
-  "types": "types/lib/Server.d.ts",
   "bin": "bin/webpack-dev-server.js",
-  "files": [
-    "bin",
-    "lib",
-    "dist",
-    "client",
-    "types"
-  ],
-  "scripts": {
-    "fmt:check": "prettier \"{**/*,*}.{js,json,md,yml,css,ts}\" --list-different",
-    "lint:prettier": "prettier --cache --list-different .",
-    "lint:code": "eslint --cache .",
-    "lint:types": "tsc --pretty --noEmit",
-    "lint:spelling": "cspell --cache --no-must-find-files --quiet \"**/*.*\"",
-    "lint": "npm-run-all -l -p \"lint:**\"",
-    "fix:code": "npm run lint:code -- --fix",
-    "fix:prettier": "npm run lint:prettier -- --write",
-    "fix": "npm-run-all -l fix:schema fix:code fix:prettier",
-    "validate:changeset": "node .changeset/changeset-validate.mjs",
-    "build:cjs": "rimraf -g ./dist/* && babel lib --out-dir dist --env-name cjs --copy-files --no-copy-ignored && node ./scripts/finalize-cjs-build.mjs",
-    "build:client": "node ./scripts/build-client.mjs",
-    "build:types": "rimraf -g ./types/* && tsc --declaration --emitDeclarationOnly --outDir types && node ./scripts/extend-webpack-types.js && prettier \"types/**/*.ts\" --write && prettier \"types/**/*.ts\" --write",
-    "build": "npm-run-all -p \"build:**\"",
-    "test:only": "node ./scripts/check-test-ports.mjs && node ./scripts/run-tests.mjs",
-    "test:coverage": "npm run test:only -- --experimental-test-coverage --test-coverage-include=lib/** --test-coverage-include=bin/** --test-coverage-include=client/** --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
-    "test:watch": "npm run test:only -- --watch",
-    "test": "npm run test:coverage",
-    "pretest": "npm run lint",
-    "prepare": "husky && npm run build",
-    "lint:schema": "schema-utils precompile --check --minify lib/options.json",
-    "fix:schema": "schema-utils precompile --minify lib/options.json"
-  },
+  "bugs": "https://github.com/webpack/webpack-dev-server/issues",
   "dependencies": {
     "@types/bonjour": "^3.5.13",
     "@types/connect-history-api-fallback": "^1.5.4",
@@ -89,6 +28,7 @@
     "webpack-dev-middleware": "^8.6.1",
     "ws": "^8.20.0"
   },
+  "description": "Serves a webpack app. Updates the browser on changes.",
   "devDependencies": {
     "@babel/cli": "^8.0.6",
     "@babel/core": "^8.0.6",
@@ -145,18 +85,81 @@
     "webpack-cli": "^7.2.1",
     "webpack-merge": "^6.0.1"
   },
+  "engines": {
+    "node": "\u003e= 22.15.0"
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/Server.js",
+      "import": "./lib/Server.js",
+      "require": "./dist/Server.js",
+      "types": "./types/lib/Server.d.ts"
+    },
+    "./client/*": "./client/*",
+    "./lib/servers/BaseServer.js": {
+      "default": "./lib/servers/BaseServer.js",
+      "import": "./lib/servers/BaseServer.js",
+      "require": "./dist/servers/BaseServer.js",
+      "types": "./types/lib/servers/BaseServer.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "dist",
+    "client",
+    "types"
+  ],
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/webpack"
+  },
+  "homepage": "https://github.com/webpack/webpack-dev-server#readme",
+  "license": "MIT",
+  "main": "./dist/Server.js",
+  "module": "./lib/Server.js",
+  "name": "webpack-dev-server",
+  "overrides": {
+    "@simple-git/argv-parser": "2.0.1"
+  },
   "peerDependencies": {
     "webpack": "^5.101.0"
   },
   "peerDependenciesMeta": {
-    "webpack-cli": {
+    "webpack": {
       "optional": true
     },
-    "webpack": {
+    "webpack-cli": {
       "optional": true
     }
   },
-  "engines": {
-    "node": ">= 22.15.0"
-  }
+  "repository": "https://github.com/webpack/webpack-dev-server",
+  "scripts": {
+    "build": "npm-run-all -p \"build:**\"",
+    "build:cjs": "rimraf -g ./dist/* \u0026\u0026 babel lib --out-dir dist --env-name cjs --copy-files --no-copy-ignored \u0026\u0026 node ./scripts/finalize-cjs-build.mjs",
+    "build:client": "node ./scripts/build-client.mjs",
+    "build:types": "rimraf -g ./types/* \u0026\u0026 tsc --declaration --emitDeclarationOnly --outDir types \u0026\u0026 node ./scripts/extend-webpack-types.js \u0026\u0026 prettier \"types/**/*.ts\" --write \u0026\u0026 prettier \"types/**/*.ts\" --write",
+    "fix": "npm-run-all -l fix:schema fix:code fix:prettier",
+    "fix:code": "npm run lint:code -- --fix",
+    "fix:prettier": "npm run lint:prettier -- --write",
+    "fix:schema": "schema-utils precompile --minify lib/options.json",
+    "fmt:check": "prettier \"{**/*,*}.{js,json,md,yml,css,ts}\" --list-different",
+    "lint": "npm-run-all -l -p \"lint:**\"",
+    "lint:code": "eslint --cache .",
+    "lint:prettier": "prettier --cache --list-different .",
+    "lint:schema": "schema-utils precompile --check --minify lib/options.json",
+    "lint:spelling": "cspell --cache --no-must-find-files --quiet \"**/*.*\"",
+    "lint:types": "tsc --pretty --noEmit",
+    "prepare": "husky \u0026\u0026 npm run build",
+    "pretest": "npm run lint",
+    "test": "npm run test:coverage",
+    "test:coverage": "npm run test:only -- --experimental-test-coverage --test-coverage-include=lib/** --test-coverage-include=bin/** --test-coverage-include=client/** --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
+    "test:only": "node ./scripts/check-test-ports.mjs \u0026\u0026 node ./scripts/run-tests.mjs",
+    "test:watch": "npm run test:only -- --watch",
+    "validate:changeset": "node .changeset/changeset-validate.mjs"
+  },
+  "type": "module",
+  "types": "types/lib/Server.d.ts",
+  "version": "6.1.0"
 }
