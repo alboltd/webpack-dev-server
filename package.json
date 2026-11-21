@@ -122,7 +122,10 @@
   "name": "webpack-dev-server",
   "overrides": {
     "@simple-git/argv-parser": "2.0.1",
-    "shell-quote": "1.12.0"
+    "shell-quote": "1.12.0",
+    "undici@\u003e=6 \u003c7": "6.29.1",
+    "undici@\u003e=7 \u003c8": "7.30.2",
+    "undici@\u003e=8 \u003c9": "8.13.1"
   },
   "peerDependencies": {
     "webpack": "^5.101.0"
